@@ -1,0 +1,47 @@
+services:
+    nginx:
+        image: nginx:1.25-alpine
+        container_name: app_nginx
+        ports:
+            - "8080:80"
+        volumes:
+            - ./src:/var/www/html
+            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php
+        networks:
+            - laravel_network
+    php:
+        image: phpfpm84
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        container_name: app_php
+        volumes:
+            - ./src:/var/www/html
+        depends_on:
+            - mysql
+        networks:
+            - laravel_network
+    mysql:
+        image: mysql:8.0
+        container_name: app_mysql
+        ports:
+            - "33060:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: rootpassword
+            MYSQL_DATABASE: app_db
+            MYSQL_USER: appuser
+            MYSQL_PASSWORD: apppassword
+        volumes:
+            - mysql_data:/var/lib/mysql
+        networks:
+            - laravel_network
+
+networks:
+    laravel_network:
+        driver: bridge
+
+volumes:
+    mysql_data:
+        driver: local

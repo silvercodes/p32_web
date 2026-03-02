@@ -12,5 +12,17 @@
 // });
 
 
+// class ValidationException extends Exception
+// {
+//     private $field;
+
+//     public function __construct($field, $message = "")
+//     {
+//         $this->field = $field;
+//         parent::__construct($message ?: "Validation failed for $field")
+//     }
+// }
+
+
 
 
