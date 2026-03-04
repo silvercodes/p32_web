@@ -220,22 +220,76 @@
 
 
 
-class ParentClass {
-    public static function who() {
-        echo __CLASS__;
-    }
-    public static function test() {
-        static::who();
-    }
-}
+// class ParentClass {
+//     public static function who() {
+//         echo __CLASS__;
+//     }
+//     public static function test() {
+//         static::who();
+//     }
+// }
 
-class Child extends ParentClass {
-    public static function who() {
-        echo __CLASS__;
-    }
-}
+// class Child extends ParentClass {
+//     public static function who() {
+//         echo __CLASS__;
+//     }
+// }
 
-Child::test();
+// Child::test();
+
+
+
+
+
+// ============== Singleton ===============
+
+// class Database {
+//     private static $instances = [];
+
+//     protected function __construct()
+//     {}
+
+//     public static function getInstace() {
+//         $class = static::class;
+
+//         if (!isset(self::$instances[$class]))
+//             self::$instances[$class] = new static();
+
+//         return self::$instances[$class];
+//     }
+// }
+
+// class MySQLDatabase extends Database {}
+// class PgDatabase extends Database {}
+
+// $mysql = MySQLDatabase::getInstace();
+// $pg = PgDatabase::getInstace();
+
+
+
+
+
+
+
+// class Model {
+//     public static function create($data) {
+//         $instance = new static();
+//         foreach($data as $key => $value)
+//             $instance->$key = $value;
+
+//         return $instance;
+//     }
+// }
+
+// class User extends Model {}
+// class Post extends Model {}
+
+// $user = User::create(['email' => 'vasia@mail.com']);
+
+
+
+
+
 
 
 
