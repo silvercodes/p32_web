@@ -260,69 +260,69 @@ interface ISavable {
 
 // ===========================
 
-interface RepositoryInterface {
-    public function find($id): object|null;
-    public function findAll(): array;
-    public function save(object $entity): void;
-    public function delete($id): void;
-}
+// interface RepositoryInterface {
+//     public function find($id): object|null;
+//     public function findAll(): array;
+//     public function save(object $entity): void;
+//     public function delete($id): void;
+// }
 
-trait BaseRepository {
-    protected array $storage = [];
-    protected int $nextId = 1;
+// trait BaseRepository {
+//     protected array $storage = [];
+//     protected int $nextId = 1;
 
-    public function find($id): object|null {
-        return $this->storage[$id];
-    }
-    public function findAll(): array {
-        return array_values($this->storage);
-    }
+//     public function find($id): object|null {
+//         return $this->storage[$id];
+//     }
+//     public function findAll(): array {
+//         return array_values($this->storage);
+//     }
     
-    public function delete($id): void {
-        if (isset($this->storage[$id])) {
-            unset($this->storage[$id]);
-        }
-    }
+//     public function delete($id): void {
+//         if (isset($this->storage[$id])) {
+//             unset($this->storage[$id]);
+//         }
+//     }
 
-    protected function getNextId(): int {
-        return $this->nextId++;
-    }
-}
+//     protected function getNextId(): int {
+//         return $this->nextId++;
+//     }
+// }
 
 
-class User {
-    public int $id;
-    public string $name;
-    public string $email;
-    public function __construct(string $name, string $email)
-    {
-        $this->name = $name;
-        $this->email = $email;
-    }
-}
+// class User {
+//     public int $id;
+//     public string $name;
+//     public string $email;
+//     public function __construct(string $name, string $email)
+//     {
+//         $this->name = $name;
+//         $this->email = $email;
+//     }
+// }
 
-class UserRepository implements RepositoryInterface {
-    use BaseRepository;
+// class UserRepository implements RepositoryInterface {
+//     use BaseRepository;
 
-    public function save(object $entity): void {
-        if (!isset($entity->id)) {
-            $entity->id = $this->getNextId();
-        }
+//     public function save(object $entity): void {
+//         if (!isset($entity->id)) {
+//             $entity->id = $this->getNextId();
+//         }
 
-        $this->storage[$entity->id] = $entity;
-    }
+//         $this->storage[$entity->id] = $entity;
+//     }
 
-    public function findByName(string $name): array|null {
-        return array_filter($this->storage, fn($u) => $u->name == $name);
-    }
-}
+//     public function findByName(string $name): array|null {
+//         return array_filter($this->storage, fn($u) => $u->name == $name);
+//     }
+// }
 
-$userRepo = new UserRepository();
-$userRepo->save(new User('vasia', 'vasia@mail.com'));
-$userRepo->save(new User('petya', 'petya@mail.com'));
+// $userRepo = new UserRepository();
+// $userRepo->save(new User('vasia', 'vasia@mail.com'));
+// $userRepo->save(new User('petya', 'petya@mail.com'));
 
-foreach($userRepo->findAll() as $user)
-    echo "- {$user->name}\n";
+// foreach($userRepo->findAll() as $user)
+//     echo "- {$user->name}\n";
 
 
 
