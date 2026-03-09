@@ -1,0 +1,16 @@
+{
+    "name": "root/6.psr",
+    "type": "project",
+    "authors": [
+        {
+            "name": "svs"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Tests\\": "tests/"
+        }
+    }
+}
